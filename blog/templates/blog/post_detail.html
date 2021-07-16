@@ -54,7 +54,11 @@
                     <p>{{post.create_at}}</p>
                     <hr />
                     <!-- Preview image-->
-                    <img class="img-fluid rounded" src="{{post.head_image.url}}" alt="{{post.title}}" />
+                    {% if p.head_image %}
+                    <img class="card-img-top" src="{{p.head_image.url}}" alt="{{post.title}}" />
+                    {% else %}
+                    <img class="card-img-top" src="https://picsum.photos/seed/{{post.id}}/600/300" alt="{{p.title}}" />
+                    {% endif %}
                     <hr />
                     <!-- Post content-->
                     <p>{{post.content}}</p>
