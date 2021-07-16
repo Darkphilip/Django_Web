@@ -5,6 +5,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
 
+    head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d', blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # author: 추후 작성 예정
@@ -13,4 +14,4 @@ class Post(models.Model):
         return f'[{self.pk}] {self.title}'
 
     def get_absolute_url(self):
-        return f'/blog/{self.pk}'
+        return f'/blog/{self.pk}/'
