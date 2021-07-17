@@ -8,8 +8,7 @@
         <meta name="author" content="" />
         <title>{{post.title}} - Blog</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+        <script src="https://kit.fontawesome.com/5430a3b33e.js" crossorigin="anonymous"></script>        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -54,15 +53,33 @@
                     <p>{{post.create_at}}</p>
                     <hr />
                     <!-- Preview image-->
-                    {% if p.head_image %}
-                    <img class="card-img-top" src="{{p.head_image.url}}" alt="{{post.title}}" />
+                    {% if post.head_image %}
+                        <img class="card-img-top" src="{{post.head_image.url}}" alt="{{post.title}}" />
                     {% else %}
-                    <img class="card-img-top" src="https://picsum.photos/seed/{{post.id}}/600/300" alt="{{p.title}}" />
+                        <img class="card-img-top" src="https://picsum.photos/seed/{{post.id}}/600/300" alt="{{p.title}}" />
                     {% endif %}
                     <hr />
                     <!-- Post content-->
                     <p>{{post.content}}</p>
+
+                    {% if post.file_upload %}
+                    <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" type="button" role="button" download>
+                        Download:
+                        {%if post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                            <i class="far fa-file-excel"></i>
+                        {%elif post.get_file_ext == 'csv'%}
+                            <i class="fas fa-file-csv"></i>
+                        {%elif post.get_file_ext == 'docx'%}
+                            <i class="fas fa-file-word"></i>
+                        {%else%}
+                            <i class="far fa-file-alt"></i>
+                        {%endif%}
+                        {{post.get_file_name}}
+                    </a>
+                    {%endif%}
+
                     <hr />
+
                     <!-- Comments form-->
                     <div class="card my-4">
                         <h5 class="card-header">Leave a Comment:</h5>
