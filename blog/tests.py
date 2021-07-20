@@ -131,11 +131,12 @@ class TestView(TestCase):
 
         self.assertIn(self.post_001.title, soup.title.text)
         self.navbar_test(soup)
+        self.category_card_test(soup)
 
         main_area = soup.find('div', id='main-area')
         post_area = main_area.find('div', id="post-area")
         self.assertIn(self.post_001.title, post_area.text)
-
+        self.assertIn(self.post_001.category.name, post_area.text)
         self.assertIn(self.user_butter.username.upper(), post_area.text)
 
         self.assertIn(self.post_001.content, post_area.text)
