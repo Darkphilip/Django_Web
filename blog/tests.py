@@ -7,10 +7,13 @@ from .models import Post, Category, Tag
 class TestView(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user_butter = User.objects.create_user(
-            username='butter',
+        self.user_obama = User.objects.create_user(
+            username='obama',
             password='anonymous'
         )
+        self.user_obama.is_staff = True
+        self.user_obama.save()
+
         self.user_better = User.objects.create_user(
             username='better',
             password='anonymous'
@@ -37,7 +40,7 @@ class TestView(TestCase):
             title='첫번째 포스트입니다.',
             content='Hello, World!. We are the World.',
             category=self.category_programming,
-            author=self.user_butter
+            author=self.user_obama
         )
         self.post_001.tags.add(self.tag_python_hello)
 
@@ -161,7 +164,7 @@ class TestView(TestCase):
         post_area = main_area.find('div', id="post-area")
         self.assertIn(self.post_001.title, post_area.text)
         self.assertIn(self.post_001.category.name, post_area.text)
-        self.assertIn(self.user_butter.username.upper(), post_area.text)
+        self.assertIn(self.user_obama.username.upper(), post_area.text)
 
         self.assertIn(self.post_001.content, post_area.text)
 
@@ -204,9 +207,13 @@ class TestView(TestCase):
     def test_create_post_with_login(self):
         self.client.login(username='better', password='anonymous')
         response = self.client.get('/blog/create_post/')
-        self.assertEqual(response.status_code, 200)
-        soup = BeautifulSoup(response.content, 'html.parser')
+        self.assertNotEqual(response.status_code, 200)
 
+        self.client.login(username='obama', password='anonymous')
+        response = self.client.get('/blog/create_post/')
+        self.assertEqual(response.status_code, 200)
+
+        soup = BeautifulSoup(response.content, 'html.parser')
         self.assertEqual('Create Post - Blog', soup.title.text)
         main_area = soup.find('div', id='main-area')
         self.assertIn('Create a New Post', main_area.text)
@@ -221,5 +228,5 @@ class TestView(TestCase):
 
         last_post = Post.objects.last()
         self.assertEqual(last_post.title, 'Post Form 만들기')
-        self.assertEqual(last_post.author.username, 'better')
+        self.assertEqual(last_post.author.username, 'obama')
         self.assertEqual(last_post.content, 'Post Form 페이지 만들기 Test')
