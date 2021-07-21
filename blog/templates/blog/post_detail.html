@@ -3,6 +3,7 @@
 {{post.title}} | Blog
 {% endblock %}
 {% block main_area %}
+
 <div id="post-area">
     {% if post.category %}
     <span class="badge badge-secondary float-right">{{post.category}}</span>
@@ -20,6 +21,9 @@
         <a href="#!">{{post.author | upper}}</a>
     </p>
     <hr />
+    {% if user.is_authenticated and user == post.author %}
+    <a type="button" href="/blog/update_post/{{post.pk}}" class="btn btn-outline-success btn-sm float-right"><i class="fas fa-pen"></i>&nbspEdit Post</a>
+    {%endif%}
     <!-- Date and time-->
     <p>{{post.create_at}}</p>
     <hr />
