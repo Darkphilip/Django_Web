@@ -267,7 +267,7 @@ class TestView(TestCase):
 
         tag_str_input = main_area.find('input', id='id_tags_str')
         self.assertTrue(tag_str_input)
-        self.assertIn('파이썬 공부;python', tag_str_input.attrs['value'])
+        self.assertIn('파이썬 공부; python', tag_str_input.attrs['value'])
 
         response = self.client.post(
             update_post_url,
