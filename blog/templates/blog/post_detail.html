@@ -35,7 +35,7 @@
     {% endif %}
     <hr />
     <!-- Post content-->
-    <p>{{post.content}}</p>
+    <p>{{post.get_content_markdown | safe}}</p>
 
     {% if post.file_upload %}
     <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" type="button" role="button" download>
@@ -52,7 +52,7 @@
         {{post.get_file_name}}
     </a>
     {%endif%}
-  {% if post.tags.exists%}
+    {% if post.tags.exists%}
     <i class="fas fa-tags"></i>
     {% for tag in post.tags.iterator %}
     <a href="{{tag.get_absolute_url}}"><span class="badge badge-light">{{tag}}</span></a>
