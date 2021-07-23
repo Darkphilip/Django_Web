@@ -6,7 +6,7 @@
 {% block main_area %}
 <h1>Create a New Post</h1>
 <hr/>
-<form method="post" enctype="multipart/form-data">{% csrf_token %}
+<form method="post" enctype="multipart/form-data">
     <table>
         {{form | crispy}}
         <div id="div_id_tags_str">
