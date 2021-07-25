@@ -15,29 +15,27 @@
 
     <section>
         <div class="container">
-            <div class="row justify-content-between">
+            <div class="row justify-content-between mt-5">
                 <div class="col-lg-6 text-light">
-                    <h1 class="mt-5">Django First Page</h1>
+                    <h1 class="mt-1">Django First Page</h1>
                     <p>파이썬과 Django로 만드는 첫번째 웹페이지<br/>
                         클린코드 구현 소프트웨어 아키텍처 </p>
                 </div>
                 <div class="col-lg-5">
-                    <h2 class="text-light mt-5">Blog - Recent Posts</h2>
+                    <h2 class="text-light">Blog - Recent Posts</h2>
+                    {% for post in recent_posts %}
                     <div class="card mt-1">
                         <div class="card-body">
-                            가장 최근 포스트 내용
+                            <h6><a href="{{post.get_absolute_url}}" class="text-decoration-none text-dark">{{post.title}}</a></h6>
+                            <span class="badge badge-pill badge-light float-right">
+                                <img class="mr-1 rounded-circle" alt="{{post.author}}" src="{{post.get_avatar_url}}" width="20px">
+                                {{post.author.username}}
+                                &nbsp;&nbsp;
+                                {{post.create_at}}
+                            </span>
                         </div>
                     </div>
-                    <div class="card mt-1">
-                        <div class="card-body">
-                            Post 2
-                        </div>
-                    </div>
-                    <div class="card mt-1">
-                        <div class="card-body">
-                            Post 3
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -6,3 +6,11 @@ body {
     -o-background-size: cover;
 }
 
+section {
+    margin-bottom: 150px;
+}
+
+.card {
+    background: rgba(255,255,255,0.5);
+
+}
