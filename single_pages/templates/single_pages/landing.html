@@ -1,16 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>tigeryoon의 웹사이트</title>
+    <title>Django Basic Website</title>
+    <link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/5430a3b33e.js" crossorigin="anonymous"></script>
+    <!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">-->
+    <link href="{% static 'single_pages/css/landing.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <nav>
-    <a href="/blog/">Blog</a>
-    <a href="/about-me/">About me</a>
-  </nav>
+{% include 'blog/navbar.html' %}
 
-  <h1>안녕하세요. Django_Basic 웹사이트입니다.</h1>
-  <h2>Test Website</h2>
+    <section>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-6 text-light">
+                    <h1 class="mt-5">Django First Page</h1>
+                    <p>파이썬과 Django로 만드는 첫번째 웹페이지<br/>
+                        클린코드 구현 소프트웨어 아키텍처 </p>
+                </div>
+                <div class="col-lg-5">
+                    <h2 class="text-light mt-5">Blog - Recent Posts</h2>
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            가장 최근 포스트 내용
+                        </div>
+                    </div>
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            Post 2
+                        </div>
+                    </div>
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            Post 3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div class="fixed-bottom">
+    {% include 'blog/footer.html' %}
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
 </html>
